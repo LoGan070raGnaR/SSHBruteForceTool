@@ -124,6 +124,59 @@ In summary, the script utilizes the `pwn` library for logging and interaction, t
 - API Docs: [Docs](https://docs.paramiko.org/en/latest/)
 - Transport Class: [Transport](https://docs.paramiko.org/en/latest/api/transport.html)
 
+------------
+## Troubleshooting Steps for SSH Bruteforce Script
+
+### Error: Unable to Connect to Port 22 on 127.0.0.1
+
+1. **Check SSH Server Status:**
+   ```bash
+   sudo service ssh start
+   ```
+   Ensure that the SSH server is running. If not, install the SSH server:
+   ```bash
+   sudo apt update
+   sudo apt install openssh-server
+   ```
+
+2. **Verify SSH Port:**
+   Confirm that your SSH server is running on port 22. Adjust the port if necessary.
+
+3. **Firewall Check:**
+   Make sure your firewall allows incoming connections on port 22.
+
+4. **Inspect SSH Server Logs:**
+   Look into the SSH server logs for error messages
+   ```bash
+   cat /var/log/auth.log
+   ```
+
+5. **Verify Localhost Resolution:**
+   Ensure that "`localhost`" resolves to `127.0.0.1`:
+   ```bash
+   ping localhost
+   ```
+   
+### Error: Failed to Start ssh.service: Unit ssh.service not found
+
+1. **Install SSH Server:**
+   ```bash
+   sudo apt update
+   sudo apt install openssh-server
+   ```
+
+2. **Start SSH Service:**
+   ```bash
+   sudo service ssh start
+   ```
+
+After addressing these steps, attempt to run your Python script again:
+
+```bash
+sudo python3 ssh_bruteforce.py
+```
+
+Ensure that the script has the necessary permissions to access the SSH service. If issues persist, review error messages and logs for further troubleshooting.
 
 ------------
 **Note:** This script is designed for educational purposes and ethical use only. Unauthorized access to systems is illegal and unethical.
